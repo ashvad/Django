@@ -1,0 +1,43 @@
+{%extends 'cbase.html'%}
+{%block body_block%}
+{% if messages %}
+
+
+{% for message in messages %}
+<div class="row">
+    <div class="col-4"></div>
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="col-4 bg-success text-white">
+        {{message}}
+    </div>
+    {%endif%}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <div class="col-4 bg-danger text-white">
+        {{message}}
+    </div>
+    {%endif%}
+    <div class="col-4"></div>
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+    {%for book in books%}
+    <div class="col-4 mt-2">
+        <div class="card" style="width: 18rem;">
+            {%if book.image%}
+            <img src="{{book.image.url}}" class="card-img-top" alt="..." >
+            {%endif%}
+            <div class="card-body">
+                <h5 class="card-title">Book Name</h5>
+                <p class="card-text">author:{{book.author}}</p>
+                <p class="card-text">price:{{book.amount}}</p>
+                <p class="card-text">available copies:{{book.copies}}</p>
+
+                <a href="{%url 'detailall' book.id%}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+
+    {%endfor%}
+</div>
+{%endblock%}
